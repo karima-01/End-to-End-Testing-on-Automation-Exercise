@@ -1,7 +1,4 @@
-import Pages.InfoPage;
-import Pages.PaymentPage;
-import Pages.ProductsPage;
-import Pages.SignupPage;
+import Pages.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -24,11 +21,11 @@ import javax.naming.Name;
 public class TestScenario extends BaseTest {
 
     @Test
-    public void Scenario() {
+    public void Scenario() throws InterruptedException {
 
 // First Step Of signing up
         SignupPage signupPage = new SignupPage(driver);
-        signupPage.Signupfirst("Sixth Test","Sixth_Test12@gmail.com");
+        signupPage.Signupfirst("Seventh Test","Sg8yghf789g12@gmail.com");
         Assert.assertEquals(driver.getCurrentUrl(),"https://automationexercise.com/signup","First Step Of Signing up is Successful, now with the rest of the information");
 
         InfoPage infoPage = new InfoPage(driver);
@@ -40,7 +37,7 @@ public class TestScenario extends BaseTest {
 
 
 
-        WebElement continueButton = driver.findElement(By.xpath("//*[@id=\"form\"]/div/div/div/div/a"));
+        WebElement continueButton = driver.findElement(By.xpath("/html/body/section/div/div/div/div/a"));
         continueButton.click();
 
         ProductsPage productsPage = new ProductsPage(driver);
@@ -53,18 +50,18 @@ public class TestScenario extends BaseTest {
 
         paymentPage.Payment("Test Name","49630769864435","323","04","2030");
 
-        WebElement message = driver.findElement(By.xpath("//*[@id=\"form\"]/div/div/div/h2/b"));
+        WebElement message = driver.findElement(By.xpath("/html/body/section/div/div/div/h2"));
 
-        Assert.assertEquals(message,"Order Placed!");
+        Assert.assertEquals(message.getText(),"ORDER PLACED!");
 
-        WebElement logout = driver.findElement(By.xpath("//*[@id=\"header\"]/div/div/div/div[2]/div/ul/li[4]/a"));
-        logout.click();
+        DownloadLogoutPage downloadLogoutPage  = new DownloadLogoutPage(driver);
 
-        signupPage.Login("Fourth_Test1234567890@gmail.com","1234");
+        downloadLogoutPage.Download_and_Continue();
 
-        WebElement deleteAccount = driver.findElement(By.xpath("//*[@id=\"header\"]/div/div/div/div[2]/div/ul/li[5]/a"));
+        Assert.assertEquals(driver.getCurrentUrl(),"https://automationexercise.com/");
 
-        Assert.assertTrue(deleteAccount.isDisplayed());
+        downloadLogoutPage.Logout();
+        Assert.assertEquals(driver.getCurrentUrl(),"https://automationexercise.com/login");
 
 
 

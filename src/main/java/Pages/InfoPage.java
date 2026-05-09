@@ -62,9 +62,10 @@ public class InfoPage {
         new Select(countryElement).selectByContainsVisibleText(country);
     }
 
-    public void phonecode (String phone, String zipcode){
+    public void phonecode (String phone, String zipcode) throws InterruptedException {
         driver.findElement(zipcodeBy).sendKeys(zipcode);
         driver.findElement(phoneBy).sendKeys(phone);
+
         driver.findElement(createAccButtonBy).click();
 
     }

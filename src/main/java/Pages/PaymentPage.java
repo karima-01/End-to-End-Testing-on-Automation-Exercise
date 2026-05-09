@@ -12,7 +12,7 @@ import java.time.Duration;
 public class PaymentPage {
     protected WebDriver driver;
 
-    private By cardNameBy = By.className("name-on-card");
+    private By cardNameBy = By.xpath("/html/body/section/div/div[3]/div/div[2]/form/div[1]/div/input");
 
     private By cardNoBy = By.name("card_number");
 
